@@ -118,24 +118,36 @@ const EnumRolesVar = EnumRoles[EnumRoles.ADMIN] // получаем key по val
 
 
 type UserFullName = {
-    firstName: 'Nik'
-    lastName: 'Prime'
+    firstName: string
+    lastName: string
 }
 
 type UserBaseInfo = {
-    email: 'nikprime1@gmail.com',
-    country: 'Kazakhstan'
+    email: string
+    country: string
 }
 
 // Объединение типов (union)
 type UserUnionInfo = UserFullName | UserBaseInfo
 
-// Пересечение типов (intersection)
+// Пересечение типов (intersection) -
 type UserIntersectionInfo = UserFullName & UserBaseInfo
 
+// UserUnionInfo - обязан реализовать либо UserFullName, либо UserBaseInfo
+const userUnionInfo: UserUnionInfo = {
+    email: 'nikprime1@gmail.com',
+    country: 'Vietnam'
+}
 
+// UserUnionInfo - обязан реализовать все свойства из UserFullName и UserBaseInfo
+const userIntersectionInfo: UserIntersectionInfo = {
+    email: 'nikprime1@gmail.com',
+    country: 'Vietnam',
+    firstName: 'Nick',
+    lastName: 'Antipin'
+}
 
-// Generics
+// Generics - позволяют создавать компоненты, которые способны работать с разными типами
 function genericFuncDeclaration<T>(args: T): T {
     return args
 }
@@ -154,7 +166,6 @@ const genericFunExpression = <T>(args: T): T => {
 
 
 
-
 // Utilites - Утилиты типов
 
 interface IBase {
@@ -163,7 +174,7 @@ interface IBase {
     isBase?: boolean
 }
 
-// Omit - исключает ключи из типа объекта
+// Omit - исключает определенныеп поля из типа объекта
 const omitVar: Omit<IBase, 'money'>  = {
     name: 'name',
     isBase: true
